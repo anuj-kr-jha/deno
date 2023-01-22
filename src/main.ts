@@ -12,7 +12,7 @@ const redis = await connect({
 const ok = await redis.set('hoge', 'fuga');
 const fuga = await redis.get('hoge');
 
-serve(async () => {
-	const x = await redis.get('a');
+serve(() => {
+	const x = 10;
 	return new Response('pong: ' + x);
 });
