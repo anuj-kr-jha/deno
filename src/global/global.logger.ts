@@ -39,16 +39,16 @@ const formatter = {
 
 const handlers = {
 	console: new Logger.handlers.ConsoleHandler('DEBUG', { formatter: formatter.custom }),
-	file: (filename: string) => new Logger.handlers.FileHandler('INFO', { filename, formatter: formatter.jsonWithArgs, mode: 'a' }),
-	rotatingFile: (filename: string) =>
-		new Logger.handlers.RotatingFileHandler('INFO', { filename, maxBytes: (2 ** 10) * (2 ** 10), maxBackupCount: 5, formatter: formatter.jsonWithArgs, mode: 'a' }),
+	// file: (filename: string) => new Logger.handlers.FileHandler('INFO', { filename, formatter: formatter.jsonWithArgs, mode: 'a' }),
+	// rotatingFile: (filename: string) =>
+	// 	new Logger.handlers.RotatingFileHandler('INFO', { filename, maxBytes: (2 ** 10) * (2 ** 10), maxBackupCount: 5, formatter: formatter.jsonWithArgs, mode: 'a' }),
 };
 
 Logger.setup({
 	/* define handlers */
-	handlers: Deno.env.get('DISABLE_FILE_LOGGING') ? { console: handlers.console } : {
+	handlers: {
 		console: handlers.console,
-		file: handlers.rotatingFile('./.logs/a.log'),
+		// file: handlers.rotatingFile('./.logs/a.log'),
 	},
 
 	/**
@@ -57,15 +57,14 @@ Logger.setup({
 	 * - level would not have any effect if level specified here is less than what specified in handler.
 	 * -   in that case level of handler will be used
 	 */
-	loggers: Deno.env.get('DISABLE_FILE_LOGGING') ? { default: { level: 'DEBUG', handlers: ['console'] } } : {
+	loggers: {
 		default: { level: 'DEBUG', handlers: ['console'] },
-		file: { level: 'INFO', handlers: ['file'] },
+		// file: { level: 'INFO', handlers: ['file'] },
 		consoleAndFile: { level: 'DEBUG', handlers: ['console', 'file'] },
 	},
 });
-console.log('called logger');
 
-const getLogger = () => Deno.env.get('DISABLE_FILE_LOGGING') ? Logger.getLogger('default') : Logger.getLogger('consoleAndFile');
+const lg = Logger.getLogger('default'); // Logger.getLogger('consoleAndFile');
 
-export default getLogger;
+export default lg;
 // lg.debug({a: 1, b: {c: 1}}, 'track:status', 'flag:req_id', 'id:user_id');

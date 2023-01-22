@@ -15,13 +15,14 @@ console.log('env_loaded', '\n', envs);
 declare global {
 	var redis: IOREDIS;
 	var h: typeof Utils;
-	var log: ReturnType<typeof Logger>;
+	var log: typeof Logger // ReturnType<typeof Logger>;
+	;
 	var emitter: typeof _emitter;
 	// var Lock: InstanceType<typeof Redlock>;
 }
 
 globalThis.h = Utils;
-globalThis.log = Logger();
+globalThis.log = Logger;
 globalThis.emitter = _emitter;
 globalThis.redis = new IOREDIS();
 
