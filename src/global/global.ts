@@ -8,19 +8,19 @@ import IOREDIS from './global.ioredis.ts';
 
 /* SETUP envs */
 const envs = await load({ allowEmptyValues: false, envPath: '.env', export: true }); /* loading envs from '.env' files and export to `Deno.env` */
-Logger.debug(envs, 'env_loaded', '', '');
+Logger().debug(envs, 'env_loaded', '', '');
 //
 
 declare global {
 	var redis: IOREDIS;
 	var h: typeof Utils;
-	var log: typeof Logger;
+	var log: ReturnType<typeof Logger>;
 	var emitter: typeof _emitter;
 	// var Lock: InstanceType<typeof Redlock>;
 }
 
 globalThis.h = Utils;
-globalThis.log = Logger;
+globalThis.log = Logger();
 globalThis.emitter = _emitter;
 globalThis.redis = new IOREDIS();
 

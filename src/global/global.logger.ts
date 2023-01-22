@@ -63,9 +63,9 @@ Logger.setup({
 		consoleAndFile: { level: 'DEBUG', handlers: ['console', 'file'] },
 	},
 });
+console.log('called logger');
 
-const lg = Logger.getLogger('consoleAndFile');
+const getLogger = () => Deno.env.get('DISABLE_FILE_LOGGING') ? Logger.getLogger('default') : Logger.getLogger('consoleAndFile');
 
-export default lg;
-
+export default getLogger;
 // lg.debug({a: 1, b: {c: 1}}, 'track:status', 'flag:req_id', 'id:user_id');
