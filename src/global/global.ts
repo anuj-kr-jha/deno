@@ -8,7 +8,8 @@ import IOREDIS from './global.ioredis.ts';
 
 /* SETUP envs */
 const envs = await load({ allowEmptyValues: false, envPath: '.env', export: true }); /* loading envs from '.env' files and export to `Deno.env` */
-Logger().debug(envs, 'env_loaded', '', '');
+// Logger().debug(envs, 'env_loaded', '', '');
+console.log('env_loaded', '\n', envs);
 //
 
 declare global {

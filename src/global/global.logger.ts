@@ -46,7 +46,7 @@ const handlers = {
 
 Logger.setup({
 	/* define handlers */
-	handlers: {
+	handlers: Deno.env.get('DISABLE_FILE_LOGGING') ? { console: handlers.console } : {
 		console: handlers.console,
 		file: handlers.rotatingFile('./.logs/a.log'),
 	},
@@ -57,7 +57,7 @@ Logger.setup({
 	 * - level would not have any effect if level specified here is less than what specified in handler.
 	 * -   in that case level of handler will be used
 	 */
-	loggers: {
+	loggers: Deno.env.get('DISABLE_FILE_LOGGING') ? { default: { level: 'DEBUG', handlers: ['console'] } } : {
 		default: { level: 'DEBUG', handlers: ['console'] },
 		file: { level: 'INFO', handlers: ['file'] },
 		consoleAndFile: { level: 'DEBUG', handlers: ['console', 'file'] },
