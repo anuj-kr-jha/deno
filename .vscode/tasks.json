@@ -1,0 +1,129 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+    {
+      "label": "runAndInspect:shell",
+      "type": "shell",
+      "command": "deno run --allow-net --allow-write --allow-read --allow-env --inspect ./src/main.ts",
+      "isBackground": true,
+      "problemMatcher": ["$deno"]
+    },
+    {
+      "label": "runAndInspect",
+      "type": "deno",
+      "command": "run",
+      "args": [
+        "--allow-net",
+        "--allow-write",
+        "--allow-read",
+        "--allow-env",
+        "--inspect",
+        "./src/main.ts"
+      ],
+      "problemMatcher": ["$deno"]
+    },
+    {
+      "label": "runAndInspectWait",
+      "type": "deno",
+      "command": "run",
+      "args": [
+        "--allow-net",
+        "--allow-write",
+        "--allow-read",
+        "--allow-env",
+        "--inspect-wait",
+        "./src/main.ts"
+      ],
+      "problemMatcher": ["$deno"]
+    },
+    {
+      "label": "run",
+      "type": "deno",
+      "command": "run",
+      "args": [
+        "--allow-net",
+        "--allow-write",
+        "--allow-read",
+        "--allow-env",
+        "./src/main.ts"
+      ],
+      "problemMatcher": ["$deno"]
+    },
+    {
+      "label": "runAndWatch",
+      "type": "deno",
+      "command": "run",
+      "args": [
+        "--allow-net",
+        "--allow-write",
+        "--allow-read",
+        "--allow-env",
+        "--watch",
+        "./src/main.ts"
+      ],
+      "problemMatcher": ["$deno"]
+    },
+    {
+      "label": "fmt",
+      "type": "deno",
+      "command": "fmt",
+      "args": [],
+      "problemMatcher": ["$deno"]
+    },
+    {
+      "label": "fmtAndWatch",
+      "type": "deno",
+      "command": "fmt",
+      "args": [
+        "--watch"
+      ],
+      "problemMatcher": ["$deno"]
+    },
+    {
+      "label": "lint",
+      "type": "deno",
+      "command": "lint",
+      "args": [],
+      "problemMatcher": ["$deno"]
+    },
+    {
+      "label": "lintAndWatch",
+      "type": "deno",
+      "command": "lint",
+      "args": [
+        "--watch"
+      ],
+      "problemMatcher": ["$deno"]
+    },
+    {
+      "label": "lintAndWatch",
+      "type": "deno",
+      "command": "lint",
+      "args": [
+        "--watch"
+      ],
+      "problemMatcher": ["$deno"]
+    },
+    {
+      "label": "check",
+      "type": "deno",
+      "command": "check",
+      "args": ["./src/main.ts"],
+      "problemMatcher": ["$deno"]
+    },
+    {
+      "label": "checkWithReload",
+      "type": "deno",
+      "command": "check",
+      "args": ["-r", "./src/main.ts"],
+      "problemMatcher": ["$deno"]
+    },
+    {
+      "label": "checkAllWithRemoveAndNPM",
+      "type": "deno",
+      "command": "check",
+      "args": ["--all", "./src/main.ts"],
+      "problemMatcher": ["$deno"]
+    }
+  ]
+}

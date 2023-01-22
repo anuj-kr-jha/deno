@@ -1,0 +1,52 @@
+{
+	"deno.enable": true,
+	"deno.lint": true,
+	"markdownlint.run": "onSave",
+
+	/* inlayHints */
+	"deno.inlayHints.enumMemberValues.enabled": false,
+	"deno.inlayHints.functionLikeReturnTypes.enabled": false,
+	"deno.inlayHints.parameterNames.enabled": "none",
+	"deno.inlayHints.propertyDeclarationTypes.enabled": false,
+	"deno.inlayHints.variableTypes.enabled": false,
+	/* ----- */
+
+	"deno.suggest.imports.autoDiscover": true,
+	"debug.javascript.usePreview": false,
+
+	/* editor */
+	"editor.formatOnSave": true,
+	"[typescript]": {
+		"editor.defaultFormatter": "denoland.vscode-deno"
+	},
+	/* ----- */
+
+	/* files */
+	"files.exclude": {
+		"**/.git": true,
+		"**/.svn": true,
+		"**/.hg": true,
+		"**/CVS": true,
+		"**/.DS_Store": true,
+		"**/Thumbs.db": true,
+		"deno.jsonc": false,
+		"deno.lock": false,
+		".markdownlint.json": false
+	},
+	/* ----- */
+
+	/* explorerExclude */
+	"explorerExclude.backup": {},
+	/* ----- */
+
+	/* cSpell */
+	"cSpell.words": [
+		"bullmq",
+		"datetime",
+		"deno",
+		"NOTSET",
+		"Redlock",
+		"testdata"
+	]
+	/* ----- */
+}
