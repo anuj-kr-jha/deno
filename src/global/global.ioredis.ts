@@ -1,6 +1,6 @@
 // deno-lint-ignore-file no-explicit-any
 import { EventEmitter, Redis, RedisOptions } from '../deps.ts';
-import initializeRedlock from './global.redlock.ts';
+// import initializeRedlock from './global.redlock.ts';
 
 export default class RedisClient {
 	private options: RedisOptions;
@@ -20,57 +20,57 @@ export default class RedisClient {
 	public redLock!: InstanceType<typeof Redis> & { on(eventName: string | symbol, listener: (...args: any[]) => void): EventEmitter };
 	public bull!: InstanceType<typeof Redis> & { on(eventName: string | symbol, listener: (...args: any[]) => void): EventEmitter };
 
-	public json = {
-		/**
-		 * @ref:  https://redis.io/commands/set
-		 */
-		set: async (key: string, path: string, value: any, options?: { mode?: 'NX' | 'XX'; EX?: number }): Promise<'OK' | null> => {
-			try {
-				// - JSON.SET key path value [NX | XX]
+	// public json = {
+	// 	/**
+	// 	 * @ref:  https://redis.io/commands/set
+	// 	 */
+	// 	set: async (key: string, path: string, value: any, options?: { mode?: 'NX' | 'XX'; EX?: number }): Promise<'OK' | null> => {
+	// 		try {
+	// 			// - JSON.SET key path value [NX | XX]
 
-				if (typeof options?.EX === 'number' && !isNaN(options.EX)) {
-					// prettier-ignore
-					const txnRes = options?.mode
-						? await this.client
-							.multi()
-							.call('JSON.SET', key, path, h.stringify(value), options.mode)
-							.expire(key, options.EX)
-							.exec()
-						: await this.client
-							.multi()
-							.call('JSON.SET', key, path, h.stringify(value))
-							.expire(key, options.EX)
-							.exec(); // [ [err, res], [ err, res], .. ]
+	// 			if (typeof options?.EX === 'number' && !isNaN(options.EX)) {
+	// 				// prettier-ignore
+	// 				const txnRes = options?.mode
+	// 					? await this.client
+	// 						.multi()
+	// 						.call('JSON.SET', key, path, h.stringify(value), options.mode)
+	// 						.expire(key, options.EX)
+	// 						.exec()
+	// 					: await this.client
+	// 						.multi()
+	// 						.call('JSON.SET', key, path, h.stringify(value))
+	// 						.expire(key, options.EX)
+	// 						.exec(); // [ [err, res], [ err, res], .. ]
 
-					if (!txnRes || txnRes[0][0] || txnRes[1][0]) return null;
-					const jsonRes = txnRes[0][1];
-					const expireRes = txnRes[1][1]; // 1 if the timeout was set. 0 if the timeout was not set.
-					if (jsonRes && !expireRes) log.warning(`[Redis] failed to set expiry wit [JSON.SET] ${key} ${path} ${value} ${options?.EX} ${expireRes}`);
-					return jsonRes as 'OK' | null;
-				}
+	// 				if (!txnRes || txnRes[0][0] || txnRes[1][0]) return null;
+	// 				const jsonRes = txnRes[0][1];
+	// 				const expireRes = txnRes[1][1]; // 1 if the timeout was set. 0 if the timeout was not set.
+	// 				if (jsonRes && !expireRes) log.warning(`[Redis] failed to set expiry wit [JSON.SET] ${key} ${path} ${value} ${options?.EX} ${expireRes}`);
+	// 				return jsonRes as 'OK' | null;
+	// 			}
 
-				const res = options?.mode
-					? await this.client.call('JSON.SET', key, path, h.stringify(value), options.mode)
-					: await this.client.call('JSON.SET', key, path, h.stringify(value));
-				if (res === null) return res;
-				return res as 'OK' | null;
-			} catch (err: any) {
-				log.error(`[Redis] failed to set ${key} ${path} ${value} ${options?.EX} ${err.message}`);
-				return null;
-			}
-		},
+	// 			const res = options?.mode
+	// 				? await this.client.call('JSON.SET', key, path, h.stringify(value), options.mode)
+	// 				: await this.client.call('JSON.SET', key, path, h.stringify(value));
+	// 			if (res === null) return res;
+	// 			return res as 'OK' | null;
+	// 		} catch (err: any) {
+	// 			log.error(`[Redis] failed to set ${key} ${path} ${value} ${options?.EX} ${err.message}`);
+	// 			return null;
+	// 		}
+	// 	},
 
-		/**
-		 * @ref:  https://redis.io/commands/get
-		 */
-		get: async <T>(key: string, path?: string): Promise<Partial<T> | null> => {
-			// - JSON.GET key path
-			const res = await this.client.call('JSON.GET', key, path ?? '$');
-			if (res === null) return null;
-			const parsedRes = h.parse(res);
-			return Array.isArray(parsedRes) ? parsedRes[0] : parsedRes;
-		},
-	};
+	// 	/**
+	// 	 * @ref:  https://redis.io/commands/get
+	// 	 */
+	// 	get: async <T>(key: string, path?: string): Promise<Partial<T> | null> => {
+	// 		// - JSON.GET key path
+	// 		const res = await this.client.call('JSON.GET', key, path ?? '$');
+	// 		if (res === null) return null;
+	// 		const parsedRes = h.parse(res);
+	// 		return Array.isArray(parsedRes) ? parsedRes[0] : parsedRes;
+	// 	},
+	// };
 
 	constructor() {
 		this.options = {
@@ -100,7 +100,7 @@ export default class RedisClient {
 			this.isResolved = true;
 			log.debug(`IoRedis Initialized ✅`);
 			resolve(null);
-			initializeRedlock();
+			// initializeRedlock();
 		}
 	}
 

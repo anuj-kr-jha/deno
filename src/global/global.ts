@@ -1,6 +1,6 @@
 // deno-lint-ignore-file no-var
 import { load } from '../deps.ts';
-import type { Redlock } from '../deps.ts';
+// import type { Redlock } from '../deps.ts';
 import Utils from './global.util.ts';
 import { _emitter } from './global.emitter.ts';
 import Logger from './global.logger.ts';
@@ -16,7 +16,7 @@ declare global {
 	var h: typeof Utils;
 	var log: typeof Logger;
 	var emitter: typeof _emitter;
-	var Lock: InstanceType<typeof Redlock>;
+	// var Lock: InstanceType<typeof Redlock>;
 }
 
 globalThis.h = Utils;
